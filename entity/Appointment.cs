@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HospitalManagementSystem.entity
+﻿namespace HospitalManagementSystem.entity
 {
     public class Appointment
     {
@@ -17,6 +15,8 @@ namespace HospitalManagementSystem.entity
         public string? Description { get { return description; } set { description = value; } }
 
         public Appointment() { }
+
+        //Parameterized Constructor without "appointmentID"
         public Appointment(int patientId, int doctorId, DateTime appointmentDate, string description)
         {
             PatientId = patientId;
@@ -24,6 +24,8 @@ namespace HospitalManagementSystem.entity
             AppointmentDate = appointmentDate;
             Description = description;
         }
+
+        //Parameterized Constructor with "appointmentID"
         public Appointment(int appointmentId, int patientId, int doctorId, DateTime appointmentDate, string description)
         {
             AppointmentId = appointmentId;
@@ -33,9 +35,10 @@ namespace HospitalManagementSystem.entity
             Description = description;
         }
 
+        //Override for the ToString function
         public override string ToString()
         {
-            return $"Appointment ID: {AppointmentId}\nPatient ID: {PatientId}\nDoctor ID: {DoctorId}\nAppointment Date: {AppointmentDate}\nDescription: {Description}\n{new String('-', 30)}";
+            return $"{new String('-', 30)}\nAppointment ID: {AppointmentId}\nPatient ID: {PatientId}\nDoctor ID: {DoctorId}\nAppointment Date: {AppointmentDate}\nDescription: {Description}\n{new String('-', 30)}";
         }
     }
 }

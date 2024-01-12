@@ -130,7 +130,7 @@ namespace HospitalManagementSystem.dao
 
             return false;
         }
-
+        
         public bool UpdateAppointment(Appointment appointment)
         {
             try
@@ -176,6 +176,100 @@ namespace HospitalManagementSystem.dao
             return false;
         }
 
+        public List<Doctor> DisplayAllDoctors()
+        {
+            List<Doctor> doctors = new List<Doctor>();
+            try
+            {
+                using (conn = DBConnection.GetConnection())
+                {
+                    string query = $"SELECT * FROM Doctors";
+                    cmd = new SqlCommand(query, conn);
+                    reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) { Console.WriteLine("No doctors found!"); }
+                    else
+                    {
+                        while (reader.Read())
+                        {
+                            Doctor doctor = new Doctor();
+                            var data = Enumerable.Range(0, reader.FieldCount).Select(reader.GetValue).ToList();
+                            doctor.DoctorId = (int)data[0];
+                            doctor.FirstName = (string)data[1];
+                            doctor.LastName = (string)data[2];
+                            doctor.Specialization = (string)data[3];
+                            doctor.ContactNumber = (string)data[4];
+                            doctors.Add(doctor);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            return doctors;
+        }
+
+        public List<Patient> DisplayAllPatients()
+        {
+            List<Patient> patients = new List<Patient>();
+            try
+            {
+                using (conn = DBConnection.GetConnection())
+                {
+                    string query = $"SELECT * FROM Patients";
+                    cmd = new SqlCommand(query, conn);
+                    reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) { Console.WriteLine("No patients found!"); }
+                    else
+                    {
+                        while (reader.Read())
+                        {
+                            Patient patient = new Patient();
+                            var data = Enumerable.Range(0, reader.FieldCount).Select(reader.GetValue).ToList();
+                            patient.PatientID = (int)data[0];
+                            patient.FirstName = (string)data[1];
+                            patient.LastName = (string)data[2];
+                            patient.DateOfBirth = (DateTime)data[3];
+                            patient.Gender = (string)data[4];
+                            patient.ContactNumber = (string)data[5];
+                            patients.Add(patient);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            return patients;
+        }
+
+        public List<Appointment> DisplayAllAppointments()
+        {
+            List<Appointment> appointments = new List<Appointment>();
+            try
+            {
+                using (conn = DBConnection.GetConnection())
+                {
+                    string query = $"SELECT * FROM Appointments";
+                    cmd = new SqlCommand(query, conn);
+                    reader = cmd.ExecuteReader();
+                    if (!reader.HasRows) { Console.WriteLine("No appointments found!"); }
+                    else
+                    {
+                        while (reader.Read())
+                        {
+                            Appointment appointment = new Appointment();
+                            var data = Enumerable.Range(0, reader.FieldCount).Select(reader.GetValue).ToList();
+                            appointment.AppointmentId = (int)data[0];
+                            appointment.PatientId = (int)data[1];
+                            appointment.DoctorId = (int)data[2];
+                            appointment.AppointmentDate= (DateTime)data[3];
+                            appointment.Description = (string)data[4];
+                            appointments.Add(appointment);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            return appointments;
+        }
+
         /// <summary>
         /// Checks if the Patient ID is valid
         /// </summary>
@@ -217,6 +311,5 @@ namespace HospitalManagementSystem.dao
             finally { reader.Close(); }
             return false;
         }
-
     }
 }

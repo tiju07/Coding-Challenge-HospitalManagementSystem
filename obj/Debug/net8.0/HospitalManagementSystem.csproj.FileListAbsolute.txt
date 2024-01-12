@@ -43,3 +43,4 @@ C:\Users\Asus\Desktop\Hexaware Training\Technical Training\Assignments\C# Soluti
 C:\Users\Asus\Desktop\Hexaware Training\Technical Training\Assignments\C# Solutions\HospitalManagementSystem\obj\Debug\net8.0\HospitalManagementSystem.pdb
 C:\Users\Asus\Desktop\Hexaware Training\Technical Training\Assignments\C# Solutions\HospitalManagementSystem\obj\Debug\net8.0\HospitalManagementSystem.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Hexaware Training\Technical Training\Assignments\C# Solutions\HospitalManagementSystem\obj\Debug\net8.0\ref\HospitalManagementSystem.dll
+C:\Users\Asus\Desktop\Hexaware Training\Technical Training\Assignments\C# Solutions\HospitalManagementSystem\obj\Debug\net8.0\HospitalManagementSystem.sourcelink.json

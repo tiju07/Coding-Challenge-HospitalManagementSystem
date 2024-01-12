@@ -19,6 +19,8 @@ namespace HospitalManagementSystem.entity
         public string ContactNumber { get {  return contactNumber; } set {  contactNumber = value; } }
 
         public Patient() {}
+
+        //Parameterized Constructor without "patientID"
         public Patient(string firstName, string lastName, DateTime dateOfBirth, string gender, string contactNumber)
         {
             FirstName = firstName;
@@ -28,6 +30,7 @@ namespace HospitalManagementSystem.entity
             ContactNumber = contactNumber;
         }
 
+        //Parameterized Constructor with "patientID"
         public Patient(int patientId, string firstName, string lastName, DateTime dateOfBirth, string gender, string contactNumber)
         {
             PatientID = patientId;
@@ -38,9 +41,10 @@ namespace HospitalManagementSystem.entity
             ContactNumber = contactNumber;
         }
 
+        //Override for the ToString function
         public override string ToString()
         {
-            return $"Patient ID: {PatientID}\nPatient Name: {FirstName + " " + LastName}\nDate of Birth: {DateOfBirth}\nGender: {Gender}\nContact Number: {ContactNumber}";
+            return $"{new String('-', 30)}\nPatient ID: {PatientID}\nPatient Name: {FirstName + " " + LastName}\nDate of Birth: {DateOfBirth.ToString("yyyy-MM-dd")}\nGender: {Gender}\nContact Number: {ContactNumber}\n{new String('-', 30)}";
         }
     }
 }

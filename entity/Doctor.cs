@@ -17,6 +17,8 @@ namespace HospitalManagementSystem.entity
         public string? ContactNumber { get { return contactNumber; } set { contactNumber = value; } }
 
         public Doctor() {}
+
+        //Parameterized Constructor without "doctorID"
         public Doctor(string firstName, string lastName, string specialization, string contactNumber)
         {
             FirstName = firstName;
@@ -25,6 +27,7 @@ namespace HospitalManagementSystem.entity
             ContactNumber = contactNumber;
         }
 
+        //Parameterized Constructor with "doctorID"
         public Doctor(int doctorId, string firstName, string lastName, string specialization, string contactNumber)
         {
             DoctorId = doctorId;
@@ -34,9 +37,10 @@ namespace HospitalManagementSystem.entity
             ContactNumber = contactNumber;
         }
 
+        //Override for the ToString function
         public override string ToString()
         {
-            return $"Doctor ID: {DoctorId}]\nDoctor Name: {FirstName + " " + LastName}\nSpecialization : {Specialization}\nContact Number: {ContactNumber}";
+            return $"{new String('-', 30)}\nDoctor ID: {DoctorId}\nDoctor Name: {FirstName + " " + LastName}\nSpecialization : {Specialization}\nContact Number: {ContactNumber}\n{new String('-', 30)}";
         }
     }
 }

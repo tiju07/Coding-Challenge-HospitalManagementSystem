@@ -1,7 +1,7 @@
 ﻿using HospitalManagementSystem.dao;
 using HospitalManagementSystem.entity;
 
-namespace HospitalManagementSystem.mainmod
+namespace HospitalManagementSystem.main
 {
     internal class MainModule
     {
@@ -12,12 +12,16 @@ namespace HospitalManagementSystem.mainmod
             Console.WriteLine("Welcome to the Hospital Management System!");
             while (flag)
             {
-                Console.WriteLine("1. Get an appointment by it's ID");
-                Console.WriteLine("2. Get appointments for a patient");
-                Console.WriteLine("3. Get appointments for a doctor");
+                Console.WriteLine(new String('-', 30));
+                Console.WriteLine("\n1. Get an appointment by it's ID");
+                Console.WriteLine("2. Get appointments for a specific patient");
+                Console.WriteLine("3. Get appointments for a specific doctor");
                 Console.WriteLine("4. Schedule an appointment");
                 Console.WriteLine("5. Update an existing appointment");
                 Console.WriteLine("6. Cancel an appointment");
+                Console.WriteLine("7. Display all doctors");
+                Console.WriteLine("8. Display all patients");
+                Console.WriteLine("9. Display all appointments");
                 Console.WriteLine("0. Exit the application");
                 Console.Write("Enter your choice(0-6): ");
 
@@ -73,6 +77,7 @@ namespace HospitalManagementSystem.mainmod
                             if (!int.TryParse(Console.ReadLine(), out doctorId)) { Console.WriteLine("Invalid entry!"); break; }
                             Console.Write("\nEnter Appointment Date in YYYY-MM-DD hh:mm format: ");
                             DateTime appointmentDate = DateTime.ParseExact(Console.ReadLine() +":00.00", "yyyy-MM-dd HH:mm:ss.ff", null);
+                            if (appointmentDate < DateTime.Now) throw new Exception("Invalid appointment date! Appointment date should not be less the current date!");
                             Console.Write("\nEnter a description: ");
                             string? description = Console.ReadLine();
                             Appointment appointment = new Appointment(patientId, doctorId, appointmentDate, description);
@@ -132,11 +137,42 @@ namespace HospitalManagementSystem.mainmod
                         }
                         catch (Exception ex) { Console.WriteLine(ex.Message); }
                         break;
+                    case "7":
+                        try
+                        {
+                            List<Doctor> doctors = hospitalServiceImpl.DisplayAllDoctors();
+                            foreach(Doctor doctor in doctors)
+                            {
+                                Console.WriteLine(doctor.ToString());
+                            }
+                        }catch (Exception ex) { Console.WriteLine(ex.Message); }
+                        break;
+                    case "8":
+                        try
+                        {
+                            List<Patient> patients = hospitalServiceImpl.DisplayAllPatients();
+                            foreach (Patient patient in patients)
+                            {
+                                Console.WriteLine(patient.ToString());
+                            }
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.Message); }
+                        break;
+                    case "9":
+                        try
+                        {
+                            List<Appointment> appointments = hospitalServiceImpl.DisplayAllAppointments();
+                            foreach (Appointment appointment in appointments)
+                            {
+                                Console.WriteLine(appointment.ToString());
+                            }
+                        }
+                        catch (Exception ex) { Console.WriteLine(ex.Message); }
+                        break;
                     default:
                         Console.WriteLine("Invalid choice! Please enter a choice between 0 and 6");
                         break;
                 }
-
             }
         }
     }

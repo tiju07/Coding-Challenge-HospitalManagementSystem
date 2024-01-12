@@ -46,5 +46,23 @@ namespace HospitalManagementSystem.dao
         /// <param name="appointmentId"></param>
         /// <returns>A boolean value, true if the appointment was successfully canceled, false otherwise.</returns>
         public bool CancelAppointment(int appointmentId);
+
+        /// <summary>
+        /// Retrieves all the doctors
+        /// </summary>
+        /// <returns>A list of "Doctor" objects</returns>
+        public List<Doctor> DisplayAllDoctors();
+
+        /// <summary>
+        /// Retrieves all the patients
+        /// </summary>
+        /// <returns>A list of "Patient" objects</returns>
+        public List<Patient> DisplayAllPatients();
+
+        /// <summary>
+        /// Retrieves all the appointments
+        /// </summary>
+        /// <returns>A list of "Appointment" objects</returns>
+        public List<Appointment> DisplayAllAppointments();
     }
 }
